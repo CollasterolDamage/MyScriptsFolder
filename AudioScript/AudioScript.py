@@ -13,8 +13,12 @@ import os
 # Properties:
 is_flushing = False  # For testing purposes
 
+
 game_dir = "C:\\Users\\Miguel\\Desktop\\IGG-Audiosu2\\Audiosurf2.exe"
-ffmpeg_dir = "C:\\Users\\Miguel\\Desktop\\IGG-Audiosu2\\ffmpeg_source\\bin"
+ffmpeg_dir = os.getcwd() + "\\ffmpeg_dir\\bin"
+
+#Tester version
+#ffmpeg_dir = "C:\\Users\\Miguel\\Desktop\\IGG-Audiosu2\\ffmpeg_source\\bin"
 
 language = "en_US"  # Do not change! New version upcomming
 
