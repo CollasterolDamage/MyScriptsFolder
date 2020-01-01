@@ -13,9 +13,9 @@ import os
 # Properties:
 is_flushing = False  # For testing purposes
 
-
+current_dir = os.getcwd()
 game_dir = "C:\\Users\\Miguel\\Desktop\\IGG-Audiosu2\\Audiosurf2.exe"
-ffmpeg_dir = os.getcwd() + "\\ffmpeg_dir\\bin"
+ffmpeg_dir = current_dir + "\\ffmpeg_dir\\" + os.listdir(current_dir + "\\ffmpeg_dir\\.")[0] + "\\bin"
 
 #Tester version
 #ffmpeg_dir = "C:\\Users\\Miguel\\Desktop\\IGG-Audiosu2\\ffmpeg_source\\bin"
