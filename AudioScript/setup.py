@@ -15,6 +15,13 @@ def propertyWriter(file, to_replace, replace):
                     line = replace[n]
             fout.write(line)
 
+def pathEscaper(path):
+    return_path = ""
+    for character in path:
+        if character == "\\": character = "\\\\"
+        return_path = return_path + character
+    return return_path
+
 def main():
     folder_dir = sys.argv[1]
     song_folder = sys.argv[2]
@@ -24,8 +31,8 @@ def main():
         zip.extractall(folder_dir + "\\" + song_folder)
     os.remove(ffmpeg_name + ".zip")
 
-    propertyWriter("AS2Game.cmd", ["cd songs\n", "ping www.google.com -n 1 -w 1000 > NUL\n"], ["cd " + song_folder + "\n", "ping " + sys.argv[4] + " -n 1 -w 1000 > NUL\n"])
-    propertyWriter("AudioScript.py", ['game_dir = "PUT GAME DIRECTORY HERE"\n', 'ffmpeg_dir = "PUT FFMPEG BIN DIRECTORY HERE"\n'], ['game_dir = "' + folder_dir + "\\" + sys.argv[3] + '"\n', 'ffmpeg_dir = "' + folder_dir + "\\" + song_folder + "\\" + ffmpeg_name + '\\bin"\n'])
+    propertyWriter(folder_dir + "\\AS2Game.cmd", ["cd songs\n", "ping www.google.com -n 1 -w 1000 > NUL\n"], ["cd " + song_folder + "\n", "ping " + sys.argv[4] + " -n 1 -w 1000 > NUL\n"])
+    propertyWriter("AudioScript.py", ['game_dir = "PUT GAME DIRECTORY HERE"\n', 'ffmpeg_dir = "PUT FFMPEG BIN DIRECTORY HERE"\n'], ['game_dir = "' + pathEscaper(folder_dir + "\\" + sys.argv[3]) + '"\n', 'ffmpeg_dir = "' + pathEscaper(folder_dir + "\\" + song_folder + "\\" + ffmpeg_name + "\\bin") + '"\n'])
 
 
 if __name__ == '__main__':
