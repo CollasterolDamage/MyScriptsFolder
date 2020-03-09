@@ -22,7 +22,8 @@ ffmpeg_dir = "PUT FFMPEG BIN DIRECTORY HERE"
 
 handling_delay = 2  # Requires more on slow computers but if you're not on a toaster it should be fine.
 max_handle_tries = 3  # Set to -1 for infinite tries
-game_window_mode = False
+game_window_mode = True
+window_reset = True
 
 hotkey = "F5"  # Full list here: https://github.com/boppreh/keyboard/blob/master/keyboard/_canonical_names.py
 
@@ -76,10 +77,10 @@ def wait_onclose():
         error(2)
 
 
-def window_handler():
+def window_handler(reset=False):
     try:
 
-        if user32.GetForegroundWindow() == script_window:
+        if (window_reset and reset) or user32.GetForegroundWindow() == script_window:
             user32.ShowWindow(script_window, 6)
             user32.ShowWindow(script_window, 0)
             if game_window_mode:
@@ -101,6 +102,7 @@ def daemon_cycler(exception_error=False):
 
     while True:
         download_yt(search_output())
+        window_handler(reset=True)
 
 
 def search_output():
