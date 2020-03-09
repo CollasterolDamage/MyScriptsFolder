@@ -101,8 +101,7 @@ def daemon_cycler(exception_error=False):
         user32.ShowWindow(script_window, 0)
 
     while True:
-        download_yt(search_output())
-        window_handler(reset=True)
+        window_handler(reset=download_yt(search_output()))
 
 
 def search_output():
@@ -160,6 +159,9 @@ def download_yt(url):
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download(["http://www.youtube.com/watch?v=" + url])
             print(lang[language][3])
+            return False
+
+        return True
 
     except:
         error(5)
